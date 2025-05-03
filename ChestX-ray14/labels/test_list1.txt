@@ -1,0 +1,15 @@
+Average AUROC: 0.855
+Atelectasis: 0.813
+Cardiomegaly: 0.903
+Effusion: 0.866
+Infiltration: 0.684
+Mass: 0.920
+Nodule: 0.813
+Pneumonia: 0.795
+Pneumothorax: 0.942
+Consolidation: 0.818
+Edema: 0.956
+Emphysema: 0.943
+Fibrosis: 0.775
+Pleural_Thickening: 0.757
+Hernia: 0.983
