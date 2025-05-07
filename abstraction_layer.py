@@ -38,40 +38,26 @@ def _validate_inputs(probabilities: List[float], diseases: List[str], threshold:
 
 def map_model_output(probabilities: List[float], diseases: List[str]) -> str:
     """
-    Convert image model output to a natural language sentence for the highest probability.
-
-    Args:
-        probabilities: List of probabilities from the image model (e.g., [0.85, 0.12, 0.05]).
-        diseases: List of disease names in the same order (e.g., ["Pneumonia", "Normal", "Atelectasis"]).
-
-    Returns:
-        A sentence like "The image model detects a high probability of Pneumonia (0.85)."
-        Returns an error message if inputs are invalid.
+    Generates sentences for all predicted diseases, with special handling for "No finding".
     """
     is_valid, error = _validate_inputs(probabilities, diseases)
     if not is_valid:
         return f"Error: {error}"
 
-    max_probability = max(probabilities)
-    max_index = probabilities.index(max_probability)
-    disease = diseases[max_index]
-
-    return f"The image model detects a high probability of {disease} ({max_probability:.2f})."
+    # Check for "No finding" first
+    if "No finding" in diseases:
+        return "there is no find disease"
+    
+    # Generate sentences for all diseases
+    sentences = [
+        f"the {disease} predicted for this image with the probability {prob:.2f}"
+        for disease, prob in zip(diseases, probabilities)
+    ]
+    return ". ".join(sentences)
 
 def map_model_output_structured(probabilities: List[float], diseases: List[str], threshold: float = 0.5) -> Dict[str, Union[List[str], Dict[str, float], Optional[str]]]:
     """
-    Convert image model output to a structured format with sentences for diseases above a threshold.
-
-    Args:
-        probabilities: List of probabilities from the image model.
-        diseases: List of disease names in the same order.
-        threshold: Minimum probability to include in sentences (default: 0.5).
-
-    Returns:
-        A dictionary containing:
-            - 'sentences': List of sentences for diseases with probabilities >= threshold, or a default message.
-            - 'probabilities': Dictionary mapping diseases to their probabilities.
-            - 'error': Error message if inputs are invalid (otherwise None).
+    Generates structured output with special priority for "No finding".
     """
     is_valid, error = _validate_inputs(probabilities, diseases, threshold)
     if not is_valid:
@@ -81,10 +67,19 @@ def map_model_output_structured(probabilities: List[float], diseases: List[str],
             "error": f"Error: {error}"
         }
 
+    # Handle "No finding" as special case
+    if "No finding" in diseases:
+        return {
+            "sentences": ["there is no find disease"],
+            "probabilities": dict(zip(diseases, probabilities)),
+            "error": None
+        }
+
     prob_dict = dict(zip(diseases, probabilities))
     sentences = [
-        f"The image model detects a high probability of {disease} ({prob:.2f})."
-        for disease, prob in prob_dict.items() if prob >= threshold
+        f"the {disease} predicted for this image with the probability {prob:.2f}"
+        for disease, prob in prob_dict.items() 
+        if prob >= threshold
     ]
 
     if not sentences:
@@ -97,32 +92,20 @@ def map_model_output_structured(probabilities: List[float], diseases: List[str],
     }
 
 if __name__ == "__main__":
-    # Sample inputs for testing
-    probabilities = [0.85, 0.12, 0.05]
-    diseases = ["Pneumonia", "Normal", "Atelectasis"]
+    # Test case with "No finding"
+    print("=== 'No finding' Test ===")
+    test_probs = [0.2, 0.7, 0.1]
+    test_diseases = ["Pneumonia", "No finding", "Atelectasis"]
+    
+    print("Basic output:", map_model_output(test_probs, test_diseases))
+    structured = map_model_output_structured(test_probs, test_diseases, 0.6)
+    print("Structured output:", structured["sentences"])
 
-    # Test map_model_output
-    print("Testing map_model_output:")
-    result = map_model_output(probabilities, diseases)
-    print(result)
-
-    # Test map_model_output_structured
-    print("\nTesting map_model_output_structured (threshold=0.5):")
-    structured_result = map_model_output_structured(probabilities, diseases, threshold=0.5)
-    print("Sentences:", structured_result["sentences"])
-    print("Probabilities:", structured_result["probabilities"])
-    print("Error:", structured_result["error"])
-
-    # Test edge cases
-    print("\nTesting edge cases:")
-    test_cases = [
-        ([0.85], ["Pneumonia", "Normal"], "Invalid length"),
-        ([], [], "Empty inputs"),
-        ([0.85, -0.1, 0.05], ["Pneumonia", "Normal", "Atelectasis"], "Invalid probability"),
-        ([0.85, 0.12, 0.05], ["Pneumonia", "Normal", "Atelectasis"], 1.5, "Invalid threshold")
-    ]
-
-    for probs, dis, desc in test_cases:
-        print(f"\nTesting {desc}:")
-        result = map_model_output_structured(probs, dis, threshold=0.5 if desc != "Invalid threshold" else 1.5)
-        print(result)
+    # Test case without "No finding"
+    print("=== Normal Case ===")
+    normal_probs = [0.85, 0.12, 0.05]
+    normal_diseases = ["Pneumonia", "Edema", "Atelectasis"]
+    
+    print("Basic output:", map_model_output(normal_probs, normal_diseases))
+    structured = map_model_output_structured(normal_probs, normal_diseases, 0.1)
+    print("Structured output:", structured["sentences"])
