@@ -19,21 +19,24 @@ import re
 from openai import OpenAI
 
 
-CKPT_PATH = 'D:\\projects\\vqa_chest\\chexnet\\model.pth.tar'
+path_to_repository="D:\\New folder\\cxr-vqa-project"
+
+CKPT_PATH = path_to_repository+'\\model.pth.tar'
 N_CLASSES = 14
 CLASS_NAMES = ['Atelectasis', 'Cardiomegaly', 'Effusion', 'Infiltration', 'Mass', 'Nodule', 'Pneumonia',
                 'Pneumothorax', 'Consolidation', 'Edema', 'Emphysema', 'Fibrosis', 'Pleural_Thickening', 'Hernia']
 
 # this directory contains our test images. download and put the test images into this directory.
-DATA_DIR = 'D:\\projects\\vqa_chest\\chexnet\\ChestX-ray14\\images'
-# this directory is not important for our single image predictions but to avoid error please write the address of this text file properly.
-TEST_IMAGE_LIST = 'D:\\projects\\vqa_chest\\chexnet\\ChestX-ray14\\labels\\a.txt'
-# batch size is equal to one to see the performance of model for single images.
-BATCH_SIZE = 1
+DATA_DIR = path_to_repository+'\\ChestX-ray14\\images'
 # this directory addresses the image you want to test and get the report from.
 # write the name of your image correctly like :00000002_000.png
 # but before anything make sure that this test image located in the DATA_DIR directory.
-SINGLE_TEST_IMAGE = 'D:\\projects\\vqa_chest\\chexnet\\ChestX-ray14\\images\\00000003_001.png'
+SINGLE_TEST_IMAGE = path_to_repository+'\\ChestX-ray14\\images\\00000003_001.png'
+# this directory is not important for our single image predictions but to avoid error please write the address of this text file properly.
+TEST_IMAGE_LIST = path_to_repository+'\\ChestX-ray14\\labels\\a.txt'
+# batch size is equal to one to see the performance of model for single images.
+BATCH_SIZE = 1
+
 
 # Threshold configuration
 NO_FINDING_THRESHOLD = 1
