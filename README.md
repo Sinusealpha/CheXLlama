@@ -1,3 +1,8 @@
+
+This project integrates the CheXNet model for disease prediction with a large language model. This synergy enhances the generation of diagnostic reports and conclusions by incorporating patient-specific information, while also allowing radiologists to interactively query and refine these findings through the LLM.
+
+![Alt text](https://github.com/aminsistani5589/cheXNet/blob/master/ab.png)
+
 # USAGE
 ***1.*** Clone this repository to your local machine by running the following command:
 
