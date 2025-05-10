@@ -3,7 +3,25 @@ This project integrates the CheXNet model for disease prediction with a large la
 
 ![Alt text](https://github.com/aminsistani5589/cheXNet/blob/master/image_0%20(1).png)
 
-# USAGE
+# Model in Action 
+
+**Scenario: Analyzing a Chest X-Ray for Pneumonia**
+
+1.  **CheXNet Input:** `chest_xray_sample.png`
+
+## Features
+- ...
+
+## Built With
+- ...
+
+## Getting Started
+### Prerequisites
+...
+### Installation
+...
+
+### USAGE
 ***1.*** Clone this repository to your local machine by running the following command:
 
 git clone <repository_url>
