@@ -27,7 +27,10 @@ This project integrates the CheXNet model for disease prediction with a large la
 ## Getting Started
 
 ### Prerequisites
-...
+
+*  Python 3.4+
+*  [PyTorch](https://pytorch.org/) and its dependencies
+*  [openai](https://pypi.org/project/openai/) library
 
 ### USAGE
 ***1.*** Clone this repository to your local machine by running the following command:
