@@ -10,15 +10,23 @@ This project integrates the CheXNet model for disease prediction with a large la
 1.  **CheXNet Input:** `chest_xray_sample.png`
 
 ## Features
-- ...
 
+*   **Synergistic AI Integration:** Seamlessly connects the state-of-the-art **CheXNet** radiology image classification model with the powerful **Llama 3.3 Nemotron Super 49B v1 API**.
+*   **Automated Radiological Image Analysis:** Leverages CheXNet to automatically predict potential findings from chest X-ray images .
+*   **Intelligent Question-Answering:** Allows users to perform in-depth, contextual Q&A sessions with the Llama LLM, leveraging initial findings from CheXNet and the patient's relevant medical data as model inputs.
+*   **Enhanced Understanding of Medical Imagery:** Moves beyond simple classification to allow for nuanced exploration and explanation of potential conditions identified in radiology scans.
+*   **Flexible Querying:** Users can ask a wide range of questions, from simple clarifications of medical terms to more complex inquiries about potential implications or follow-up considerations.
+*   **(Potentially) Extensible Framework:** The architecture can serve as a foundation for integrating other AI models or data sources in the future.
+  
 ## Built With
-- ...
+
+**Core AI Models & APIs:**
+*   [![CheXNet](https://img.shields.io/badge/AI%20Model-CheXNet-blueviolet)](https://stanfordmlgroup.github.io/projects/chexnet/) - For radiological image classification and prediction.
+*   [![Llama 3.3 Nemotron](https://img.shields.io/badge/LLM%20API-Llama%203.3%20Nemotron%20Super%2049B%20v1-brightgreen)](https://developer.nvidia.com/nemotron-3-8b) - to interact with language model via API
 
 ## Getting Started
+
 ### Prerequisites
-...
-### Installation
 ...
 
 ### USAGE
