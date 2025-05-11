@@ -1,8 +1,6 @@
 # CheXLlama_RadiographAICoPilot
-
-This project integrates the CheXNet model for disease prediction with a large language model. This synergy enhances the generation of diagnostic reports and conclusions by incorporating patient-specific information, while also allowing radiologists to query and refine these findings through the LLM interactively.
-
 ![Alt text](https://github.com/Sinusealpha/CheXLlama_RadiographAICoPilot/blob/main/1404-02-21%2020.32.35.jpg)
+We integrated the CheXNet model for disease prediction with Llama, a large language model. This synergy enhances the generation of diagnostic reports and conclusions by incorporating patient-specific information, while also allowing radiologists to query and refine these findings through the LLM interactively.
 
 ## Model in Action 
 
