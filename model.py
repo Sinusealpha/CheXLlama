@@ -405,7 +405,7 @@ def API (prompt):
     load_dotenv(path_to_repository+"\\API.env")  # This should be outside the OpenAI constructor
     
     # Get API key
-    api_key = os.getenv("OPENROUTER_API_KEY")
+    api_key = os.getenv("API_KEY")
     if not api_key:
         raise ValueError("API key not found in environment variables")
     
