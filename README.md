@@ -38,7 +38,13 @@ git clone <repository_url>
 
 ***2.*** Download images of ChestX-ray14 from this [released page](https://nihcc.app.box.com/v/ChestXray-NIHCC) and decompress them to the [directory images](https://github.com/Sinusealpha/cxr-vqa-project/tree/main/ChestX-ray14/images).
 
-***3.*** Update model.py with Local Directory Paths:
+***3.*** create the API of Llama3.3 from [this link](https://openrouter.ai/nvidia/llama-3.3-nemotron-super-49b-v1:free) and copy your API into [API.env](https://github.com/Sinusealpha/CheXLlama_RadiographAICoPilot/blob/main/API.env)
+
+for example:
+
+API_KEY="your api"
+
+***4.*** Update model.py with Local Directory Paths:
 
 ***a.*** Define the path to the repository.
 
