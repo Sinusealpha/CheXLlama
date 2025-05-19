@@ -25,17 +25,8 @@ CKPT_PATH = path_to_repository+'\\model.pth.tar'
 N_CLASSES = 14
 CLASS_NAMES = ['Atelectasis', 'Cardiomegaly', 'Effusion', 'Infiltration', 'Mass', 'Nodule', 'Pneumonia',
                 'Pneumothorax', 'Consolidation', 'Edema', 'Emphysema', 'Fibrosis', 'Pleural_Thickening', 'Hernia']
-
-# this directory contains our test images. download and put the test images into this directory.
 DATA_DIR = path_to_repository+'\\ChestX-ray14\\images'
-# this directory addresses the image you want to test and get the report from.
-# write the name of your image correctly like :00000002_000.png
-# but before anything make sure that this test image located in the DATA_DIR directory.
 SINGLE_TEST_IMAGE = path_to_repository+'\\ChestX-ray14\\images\\00000003_002.png'
-# this directory is not important for our single image predictions but to avoid error please write the address of this text file properly.
-TEST_IMAGE_LIST = path_to_repository+'\\ChestX-ray14\\labels\\a.txt'
-# batch size is equal to one to see the performance of model for single images.
-BATCH_SIZE = 1
 
 
 # Threshold configuration
@@ -167,39 +158,8 @@ def main():
     else:
         print("=> no checkpoint found")
 
-    # Test dataset evaluation
-    test_dataset = ChestXrayDataSet(
-        data_dir=DATA_DIR,
-        image_list_file=TEST_IMAGE_LIST,
-        transform=transforms.Compose([
-            transforms.Resize(256),
-            transforms.TenCrop(224),
-            transforms.Lambda(ten_crop_to_tensor),
-            transforms.Lambda(normalize_crops)
-        ])
-    )
-
-    test_loader = DataLoader(
-        dataset=test_dataset,
-        batch_size=BATCH_SIZE,
-        shuffle=False,
-        num_workers=4,
-        pin_memory=False
-    )
-
     # Full dataset evaluation
     model.eval()
-    gt = torch.FloatTensor()
-    pred = torch.FloatTensor()
-
-    with torch.no_grad():
-        for i, (inp, target) in enumerate(test_loader):
-            gt = torch.cat((gt, target), 0)
-            bs, n_crops, c, h, w = inp.size()
-            output = model(inp.view(-1, c, h, w))
-            output_mean = output.view(bs, n_crops, -1).mean(1)
-            pred = torch.cat((pred, output_mean.data), 0)
-        
     # Single image prediction
     if os.path.isfile(SINGLE_TEST_IMAGE):
         print("Single Image Prediction Results:")
