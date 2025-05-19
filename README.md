@@ -1,8 +1,6 @@
-# CheXLlama_RadiographAICoPilot
-
-This project integrates the CheXNet model for disease prediction with a large language model. This synergy enhances the generation of diagnostic reports and conclusions by incorporating patient-specific information, while also allowing radiologists to interactively query and refine these findings through the LLM.
-
-![Alt text](https://github.com/aminsistani5589/cheXNet/blob/master/image_0%20(1).png)
+# CheXLlama
+![Alt text](https://github.com/Sinusealpha/CheXLlama_RadiographAICoPilot/blob/main/1404-02-21%2020.32.35.jpg)
+We integrated the CheXNet model for disease prediction with Llama, a large language model. This synergy enhances the generation of diagnostic reports and conclusions by incorporating patient-specific information, while also allowing radiologists to query and refine these findings through the LLM interactively.
 
 ## Model in Action 
 
@@ -13,7 +11,7 @@ This project integrates the CheXNet model for disease prediction with a large la
 ## Features
 
 *   **Synergistic AI Integration:** Seamlessly connects the state-of-the-art **CheXNet** radiology image classification model with the powerful **Llama 3.3 Nemotron Super 49B v1 API**.
-*   **Automated Radiological Image Analysis:** Leverages CheXNet to automatically predict potential findings from chest X-ray images .
+*   **Automated Radiological Image Analysis:** Leverages CheXNet to automatically predict potential findings from chest X-ray images.
 *   **Intelligent Question-Answering:** Allows users to perform in-depth, contextual Q&A sessions with the Llama LLM, leveraging initial findings from CheXNet and the patient's relevant medical data as model inputs.
 *   **Enhanced Understanding of Medical Imagery:** Moves beyond simple classification to allow for nuanced exploration and explanation of potential conditions identified in radiology scans.
 *   **Flexible Querying:** Users can ask a wide range of questions, from simple clarifications of medical terms to more complex inquiries about potential implications or follow-up considerations.
@@ -42,15 +40,15 @@ git clone <repository_url>
 
 ***3.*** Update model.py with Local Directory Paths:
 
-***a.*** define the path to the repository.
+***a.*** Define the path to the repository.
 
-for example:
+For example:
 
 path_to_repository="D:\\New folder\\cxr-vqa-project"
 
 ***b.*** choose your selected image in  [directory images](https://github.com/Sinusealpha/cxr-vqa-project/tree/main/ChestX-ray14/images) by defining its address.
 
-for example:
+For example:
 
 SINGLE_TEST_IMAGE = path_to_repository+'\\ChestX-ray14\\images\\***00000003_001.png***'
 
