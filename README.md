@@ -1,64 +1,114 @@
+-----
+
 # CheXLlama
 ![Alt text](https://github.com/Sinusealpha/CheXLlama/blob/main/1404-02-21%2020.32.35.jpg)
-We integrated the CheXNet model for disease prediction with Llama, a large language model. This synergy enhances the generation of diagnostic reports and conclusions by incorporating patient-specific information, while also allowing radiologists to query and refine these findings through the LLM interactively.
+CheXLlama is an open-source project that integrates the powerful **CheXNet** model for disease prediction with **Llama 3.3 Nemotron Super 49B v1**, a large language model (LLM). This synergistic approach enhances the generation of diagnostic reports and conclusions by incorporating patient-specific information, while also empowering radiologists to interactively query and refine these findings through the LLM.
 
-## Model in Action 
+-----
 
-**Scenario: Analyzing a Chest X-Ray for Pneumonia**
+## 🌟 Model in Action
 
-1.  **CheXNet Input:** `chest_xray_sample.png`
+Imagine a radiologist analyzing a chest X-ray. CheXLlama streamlines the process:
 
-## Features
+1.  **CheXNet Input:** A chest X-ray image (e.g., `chest_xray_sample.png`) is fed into CheXNet.
+2.  **Automated Analysis:** CheXNet quickly identifies potential findings, such as "Pneumonia detected."
+3.  **LLM Integration:** This initial finding, combined with relevant patient data, is passed to the Llama LLM.
+4.  **Interactive Querying:** The radiologist can then ask specific questions like:
+      * "What are the typical symptoms associated with this finding?"
+      * "Are there any other conditions that might present similarly?"
+      * "What follow-up procedures are recommended?"
+5.  **Refined Reports:** The LLM provides intelligent, context-aware answers, helping the radiologist generate more comprehensive and accurate diagnostic reports.
 
-*   **Synergistic AI Integration:** Seamlessly connects the state-of-the-art **CheXNet** radiology image classification model with the powerful **Llama 3.3 Nemotron Super 49B v1 API**.
-*   **Automated Radiological Image Analysis:** Leverages CheXNet to automatically predict potential findings from chest X-ray images.
-*   **Intelligent Question-Answering:** Allows users to perform in-depth, contextual Q&A sessions with the Llama LLM, leveraging initial findings from CheXNet and the patient's relevant medical data as model inputs.
-*   **Enhanced Understanding of Medical Imagery:** Moves beyond simple classification to allow for nuanced exploration and explanation of potential conditions identified in radiology scans.
-*   **Flexible Querying:** Users can ask a wide range of questions, from simple clarifications of medical terms to more complex inquiries about potential implications or follow-up considerations.
-*   **(Potentially) Extensible Framework:** The architecture can serve as a foundation for integrating other AI models or data sources in the future.
-  
-## Built With
+-----
+
+## ✨ Features
+
+  * **Synergistic AI Integration:** Seamlessly combines the cutting-edge **CheXNet** radiology image classification model with the robust **Llama 3.3 Nemotron Super 49B v1 API**.
+  * **Automated Radiological Image Analysis:** Leverages CheXNet to automatically predict potential findings from chest X-ray images, providing a rapid initial assessment.
+  * **Intelligent Question-Answering:** Enables users to engage in in-depth, contextual Q\&A sessions with the Llama LLM, utilizing initial CheXNet findings and patient-specific medical data as inputs.
+  * **Enhanced Understanding of Medical Imagery:** Moves beyond simple classification, allowing for nuanced exploration and explanation of potential conditions identified in radiology scans.
+  * **Flexible Querying:** Supports a wide range of user queries, from basic clarifications of medical terms to complex inquiries about potential implications, differential diagnoses, or recommended follow-up considerations.
+  * **(Potentially) Extensible Framework:** The modular architecture serves as a flexible foundation for future integration of other AI models, data sources, or specialized medical knowledge bases.
+
+-----
+
+## 🛠️ Built With
 
 **Core AI Models & APIs:**
-*   [![CheXNet](https://img.shields.io/badge/AI%20Model-CheXNet-blueviolet)](https://stanfordmlgroup.github.io/projects/chexnet/) - For radiological image classification and prediction.
-*   [![Llama 3.3 Nemotron](https://img.shields.io/badge/LLM%20API-Llama%203.3%20Nemotron%20Super%2049B%20v1-brightgreen)](https://developer.nvidia.com/nemotron-3-8b) - to interact with language model via API
 
-## Getting Started
+  * [](https://stanfordmlgroup.github.io/projects/chexnet/) - Utilized for precise radiological image classification and prediction.
+  * [](https://developer.nvidia.com/nemotron-3-8b) - The large language model API for interactive querying and report generation.
+
+-----
+
+## 🚀 Getting Started
+
+Follow these steps to set up and run CheXLlama on your local machine.
 
 ### Prerequisites
 
-*  Python 3.4+
-*  [PyTorch](https://pytorch.org/) and its dependencies
-*  [openai](https://pypi.org/project/openai/) library
+Ensure you have the following installed:
 
-### USAGE
-***1.*** Clone this repository to your local machine by running the following command:
+  * Python 3.4+
+  * [PyTorch](https://pytorch.org/) and its dependencies
+  * [openai](https://pypi.org/project/openai/) library (for API interaction)
 
-git clone <repository_url>
+### Usage
 
-***2.*** Download images of ChestX-ray14 from this [released page](https://nihcc.app.box.com/v/ChestXray-NIHCC) and decompress them to the [directory images](https://github.com/Sinusealpha/cxr-vqa-project/tree/main/ChestX-ray14/images).
+1.  **Clone the Repository:**
 
-***3.*** create the API of Llama3.3 from [this link](https://openrouter.ai/nvidia/llama-3.3-nemotron-super-49b-v1:free) and copy your API into [API.env](https://github.com/Sinusealpha/CheXLlama_RadiographAICoPilot/blob/main/API.env)
+    ```bash
+    git clone https://github.com/Sinusealpha/CheXLlama.git
+    cd CheXLlama
+    ```
 
-for example:
+2.  **Download ChestX-ray14 Images:**
 
-API_KEY="your api"
+      * Download the ChestX-ray14 dataset images from the official [released page](https://nihcc.app.box.com/v/ChestXray-NIHCC).
+      * Decompress the downloaded files and place them into the `ChestX-ray14/images` directory within your cloned repository.
+          * *Expected path structure:* `your_cloned_repo/ChestX-ray14/images/`
 
-***4.*** Update model.py with Local Directory Paths:
+3.  **Obtain Llama 3.3 Nemotron API Key:**
 
-***a.*** Define the path to the repository.
+      * Create your API key for Llama 3.3 from [OpenRouter.ai](https://openrouter.ai/nvidia/llama-3.3-nemotron-super-49b-v1:free).
+      * Create a file named `API.env` in the root of your cloned repository and add your API key in the following format:
+        ```
+        API_KEY="your_api_key_here"
+        ```
 
-For example:
+4.  **Update `model.py` with Local Directory Paths:**
 
-path_to_repository="D:\\New folder\\cxr-vqa-project"
+      * Open `model.py` in your preferred text editor.
 
-***b.*** choose your selected image in  [directory images](https://github.com/Sinusealpha/cxr-vqa-project/tree/main/ChestX-ray14/images) by defining its address.
+      * **Define the path to your repository:**
 
-For example:
+        ```python
+        path_to_repository = "D:\\New folder\\cxr-vqa-project" # Update this to your actual path
+        ```
 
-SINGLE_TEST_IMAGE = path_to_repository+'\\ChestX-ray14\\images\\***00000003_001.png***'
+        *(Replace `"D:\\New folder\\cxr-vqa-project"` with the absolute path to your cloned CheXLlama directory.)*
 
-***4.*** Run the model.py script on your machine to view the results. Feel free to ask any questions afterward. 😀
+      * **Choose your selected image:**
 
+          * Within `model.py`, locate the `SINGLE_TEST_IMAGE` variable.
+          * Define its address, pointing to an image within your `ChestX-ray14/images` directory:
+            ```python
+            SINGLE_TEST_IMAGE = path_to_repository + '\\ChestX-ray14\\images\\00000003_001.png' # Update filename as needed
+            ```
+            *(Make sure the image filename corresponds to an actual image you downloaded.)*
 
+5.  **Run the Model:**
 
+      * Execute the `model.py` script from your terminal:
+        ```bash
+        python model.py
+        ```
+      * The script will process the image and provide initial results. Feel free to ask any follow-up questions within the interactive session\! 😀
+
+-----
+
+## 📄 Project Paper
+
+For a more in-depth understanding of the methodology and experimental results, please refer to our research paper on arXiv:
+
+  * **[Link]** *(it will be added very soon.)*
