@@ -50,8 +50,8 @@ Follow these steps to set up and run CheXLlama on your local machine.
 Ensure you have the following installed:
 
   * Python 3.4+
-  * [PyTorch](https://pytorch.org/) and its dependencies
-  * [openai](https://pypi.org/project/openai/) library (for API interaction)
+  * pip install pytorch
+  * pip install groq (for API interaction)
 
 ### Usage
 
