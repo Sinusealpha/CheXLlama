@@ -71,9 +71,9 @@ Ensure you have the following installed:
 3.  **Obtain Llama 3.3 Nemotron API Key:**
 
       * Create your API key for Llama 3.3 from [Groq](https://groq.com/).
-      * Create a file named `API.env` in the root of your cloned repository and add your API key in the following format:
+      * Create a file named `GROQ_API_KEY.env` in the root of your cloned repository and add your API key in the following format:
         ```
-        API_KEY="your_api_key_here"
+        GROQ_API_KEY = your_api_key_here
         ```
 
 4.  **Update `model.py` with Local Directory Paths:**
@@ -83,10 +83,8 @@ Ensure you have the following installed:
       * **Define the path to your repository:**
 
         ```python
-        path_to_repository = "D:\\New folder\\cxr-vqa-project" # Update this to your actual path
+        path_to_repository="provide your path to repository here !!!" # Update this to your actual path
         ```
-
-        *(Replace `"D:\\New folder\\cxr-vqa-project"` with the absolute path to your cloned CheXLlama directory.)*
 
       * **Choose your selected image:**
 
