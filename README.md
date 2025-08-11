@@ -70,7 +70,7 @@ Ensure you have the following installed:
 
 3.  **Obtain Llama 3.3 Nemotron API Key:**
 
-      * Create your API key for Llama 3.3 from [OpenRouter.ai]([https://openrouter.ai/nvidia/llama-3.3-nemotron-super-49b-v1:free](https://groq.com/)).
+      * Create your API key for Llama 3.3 from [released page](https://groq.com/).
       * Create a file named `API.env` in the root of your cloned repository and add your API key in the following format:
         ```
         API_KEY="your_api_key_here"
