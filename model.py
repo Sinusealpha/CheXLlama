@@ -16,10 +16,10 @@ from sklearn.metrics import roc_auc_score
 from torchvision.models import DenseNet121_Weights
 from PIL import Image
 import re
-from openai import OpenAI
+from groq import Groq
 from dotenv import load_dotenv
 
-path_to_repository="D:\\New folder\\cxr-vqa-project"
+path_to_repository="provide your path to repository here !!!"
 
 CKPT_PATH = path_to_repository+'\\model.pth.tar'
 N_CLASSES = 14
@@ -27,7 +27,7 @@ CLASS_NAMES = ['Atelectasis', 'Cardiomegaly', 'Effusion', 'Infiltration', 'Mass'
                 'Pneumothorax', 'Consolidation', 'Edema', 'Emphysema', 'Fibrosis', 'Pleural_Thickening', 'Hernia']
 DATA_DIR = path_to_repository+'\\ChestX-ray14\\images'
 SINGLE_TEST_IMAGE = path_to_repository+'\\ChestX-ray14\\images\\00000003_002.png'
-
+path_to_API = path_to_repository + "\\GROQ_API_KEY.env"
 
 # Threshold configuration
 NO_FINDING_THRESHOLD = 1
@@ -359,46 +359,44 @@ medical_context = "Pneumonia is an infection that inflames the air sacs in one o
 preparing our API to retrieve responses from the Language Model.
 """
 
-def API (prompt):
+def API(prompt):
+    # Load environment variables from .env file
+    load_dotenv(path_to_API)
     
-    # Load environment variables FIRST
-    load_dotenv(path_to_repository+"\\API.env")  # This should be outside the OpenAI constructor
+    # Initialize Groq client with API key from .env
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     
-    # Get API key
-    api_key = os.getenv("API_KEY")
-    if not api_key:
-        raise ValueError("API key not found in environment variables")
-    
-    # Then create the client
-    client = OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key  # Use the retrieved key
-    )
-
     messages = []
     user_input = prompt
+    
     while True:
-        
         if user_input.lower() in ["quit", "exit"]:
             break
-    
+        
         messages.append({"role": "user", "content": user_input})
-    
-        # Keep only last 5 messages
+        
+        # Keep only last 5 messages (maintaining conversation history)
         if len(messages) > 5:
             messages = messages[-5:]
-    
+        
+        # Get response from Groq API
         response = client.chat.completions.create(
-            model="nvidia/llama-3.3-nemotron-super-49b-v1:free",
-            messages=messages
+            messages=messages,
+            model="llama3-70b-8192",  # Using Llama 3 70B model
+            temperature=0.7,
+            max_tokens=1024
         )
-    
+        
         bot_response = response.choices[0].message.content
         print("Bot:", bot_response)
         
-        user_input=input("---------------------------------------------------\nPlease feel free to share any follow-up questions\nI’m here to provide answers.\n")
-    
+        # Get next user input
+        user_input = input("---------------------------------------------------Please feel free to share any follow-up question I'm here to provide answers.")
+        
+        # Add assistant response to message history
         messages.append({"role": "assistant", "content": bot_response})
+    
+    return bot_response  # Return the final response
     
 
 ##################################################################################
