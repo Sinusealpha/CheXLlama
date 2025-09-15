@@ -19,7 +19,7 @@ import re
 from groq import Groq
 from dotenv import load_dotenv
 
-path_to_repository="provide your path to repository here !!!"
+path_to_repository="C:\\Users\\PC\\Desktop\\a\\CheXLlama"
 
 CKPT_PATH = path_to_repository+'\\model.pth.tar'
 N_CLASSES = 14
